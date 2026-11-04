@@ -4,6 +4,12 @@
   "type": "module",
   "scripts": {
     "bench": "node harness/bench.ts",
-    "bench:quick": "node harness/bench.ts --quick"
+    "bench:quick": "node harness/bench.ts --quick",
+    "build-times": "node harness/build-times.ts",
+    "typecheck": "tsc -p typescript"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "@types/node": "24.10.1"
   }
 }

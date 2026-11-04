@@ -12,7 +12,7 @@ Two workloads that show up in every AI application, written the obvious way in e
 
 **Embeddings.** Hold 10,000 vectors of 768 floats in memory, then sum them. That is 29.3 MiB of raw `f32` data. This is a vector store, a batch of model outputs, or an in-memory index.
 
-**Agent session.** Run 2,000 turns of a simulated agent. Each turn adds a 2 KiB user message and a 64 KiB tool result to the history, keeps the last 50 turns, and rebuilds the full prompt from that window. At the worst moment the program holds about 6.5 MiB of live data: the 3.2 MiB window, the 3.2 MiB prompt and the new turn. Everything else it allocates is garbage. This is the shape of a long-running agent loop.
+**Agent session.** Run 2,000 turns of a simulated agent. Each turn adds a 2 KiB user message and a 64 KiB tool result to the history, keeps the last 50 turns, and rebuilds the full prompt from that window. At the worst moment the program holds about 6.4 MiB of live data: the 3.2 MiB window plus the 3.2 MiB prompt built from it. Everything else it allocates is garbage. This is the shape of a long-running agent loop.
 
 Each language also runs an empty program, so you can see the startup cost on its own.
 
@@ -62,6 +62,36 @@ Change one line and that goes away. With mimalloc as Rust's global allocator, th
 
 **Zig matches Rust on memory.** Zig gives you the same control over layout and allocation. What it does not give you is the borrow checker. In Zig a use-after-free compiles. In Rust it does not. That is the actual trade: Rust gets you this efficiency with memory safety checked at compile time.
 
+## Build times
+
+Memory is not free and neither is compile time. Median of 3 runs on the same machine. Full numbers are in [results/darwin-arm64/build-times.md](results/darwin-arm64/build-times.md).
+
+**Cold** means no build cache for the project or the standard library: the toolchain is installed and dependencies are downloaded, nothing else. **Edit** means appending one line to the main source file and rebuilding with a warm cache.
+
+| Language | Mode | Cold (s) | Edit one line (s) | Binary (KiB) |
+| --- | --- | ---: | ---: | ---: |
+| Rust | debug | 0.38 | 0.23 | 655 |
+| Rust | release, LTO | 2.70 | 2.63 | 404 |
+| Zig | Debug | 3.50 | 1.45 | 2,170 |
+| Zig | ReleaseFast | 8.04 | 6.02 | 421 |
+| Go | default | 2.11 | 0.18 | 2,390 |
+| TypeScript | `tsc` type check | 0.97 | 0.94 | - |
+
+These programs are about 100 lines with no dependencies, so the toolchains differ in what "cold" includes. Rust ships its standard library precompiled. Go compiles its runtime into an empty cache. Zig compiles its standard library and C runtime support from source. Node runs TypeScript without a build step, so the TypeScript row is type checking only.
+
+Small programs hide Rust's real cost, which grows with dependencies. As a larger data point, [codelight](https://github.com/joelfickson/codelight), my Rust coding agent, has 358 crates in its dependency tree and about 9,000 lines of its own code. One run each, same machine:
+
+| codelight | Cold (s) | Edit one line (s) |
+| --- | ---: | ---: |
+| debug | 19.9 | 1.0 |
+| release | 41.4 | 10.3 |
+
+Debug edits stay around a second, which is what you feel while writing code. Release builds with dependencies are where Rust makes you wait.
+
+```sh
+node harness/build-times.ts --runs 3
+```
+
 ## Proof that the work is the same
 
 Each program prints a checksum. The harness computes the expected value on its own, without running any of the programs, and fails if any program, on any run, disagrees.
@@ -87,10 +117,11 @@ cargo test --release --manifest-path rust/Cargo.toml
 
 ## Run it
 
-You need [mise](https://mise.jdx.dev) for Go, Node and Zig, and [rustup](https://rustup.rs) for Rust. The versions are pinned in `mise.toml` and `rust-toolchain.toml`.
+You need [mise](https://mise.jdx.dev) for Go, Node and Zig, and [rustup](https://rustup.rs) for Rust. The versions are pinned in `mise.toml` and `rust-toolchain.toml`. The build-time script also needs the TypeScript compiler from `pnpm install`.
 
 ```sh
 mise install
+pnpm install
 node harness/bench.ts --quick
 node harness/bench.ts
 ```
@@ -116,7 +147,7 @@ Flags: `--runs 5`, `--vectors 10000`, `--turns 2000`, `--out <dir>`, `--no-build
 ## Layout
 
 ```
-harness/      benchmark runner and chart generation (TypeScript)
+harness/      benchmark runner, build-time runner and chart generation (TypeScript)
 rust/         Rust workloads and allocation tests
 zig/          Zig workloads
 go/           Go workloads
