@@ -1,0 +1,787 @@
+{
+  "env": {
+    "os": "Darwin 27.0.0",
+    "arch": "arm64",
+    "cpu": "Apple M1 Max",
+    "memoryGiB": 32,
+    "rust": "rustc 1.98.1 (48a229cea 2026-09-01)",
+    "zig": "0.17.0",
+    "go": "go version go1.27.3 darwin/arm64",
+    "node": "v26.12.1"
+  },
+  "options": {
+    "runs": 5,
+    "vectors": 10000,
+    "dims": 768,
+    "turns": 2000,
+    "window": 50
+  },
+  "noop": [
+    {
+      "lang": "Rust",
+      "label": "Rust",
+      "type": "empty",
+      "allocator": "system malloc",
+      "workload": "noop",
+      "runs": [
+        1.7,
+        1.7,
+        1.7,
+        1.7,
+        1.7
+      ],
+      "medianMiB": 1.7,
+      "seconds": 0,
+      "checksum": "0"
+    },
+    {
+      "lang": "Rust",
+      "label": "Rust + mimalloc",
+      "type": "empty",
+      "allocator": "mimalloc",
+      "workload": "noop",
+      "runs": [
+        2.2,
+        2.2,
+        2.2,
+        2.2,
+        2.2
+      ],
+      "medianMiB": 2.2,
+      "seconds": 0,
+      "checksum": "0"
+    },
+    {
+      "lang": "Zig",
+      "label": "Zig",
+      "type": "empty",
+      "allocator": "libc malloc",
+      "workload": "noop",
+      "runs": [
+        1.9,
+        1.9,
+        1.9,
+        1.9,
+        1.9
+      ],
+      "medianMiB": 1.9,
+      "seconds": 0,
+      "checksum": "0"
+    },
+    {
+      "lang": "Zig",
+      "label": "Zig + smp_allocator",
+      "type": "empty",
+      "allocator": "smp_allocator",
+      "workload": "noop",
+      "runs": [
+        1.9,
+        1.9,
+        1.9,
+        1.9,
+        1.9
+      ],
+      "medianMiB": 1.9,
+      "seconds": 0,
+      "checksum": "0"
+    },
+    {
+      "lang": "Go",
+      "label": "Go",
+      "type": "empty",
+      "allocator": "Go GC",
+      "workload": "noop",
+      "runs": [
+        4.2,
+        4.4,
+        4.2,
+        4.3,
+        4.3
+      ],
+      "medianMiB": 4.3,
+      "seconds": 0,
+      "checksum": "0"
+    },
+    {
+      "lang": "TypeScript",
+      "label": "TypeScript",
+      "type": "empty",
+      "allocator": "V8 GC",
+      "workload": "noop",
+      "runs": [
+        52,
+        51.8,
+        51.9,
+        51.8,
+        51.8
+      ],
+      "medianMiB": 51.8,
+      "seconds": 0.03,
+      "checksum": "0"
+    }
+  ],
+  "embeddings": [
+    {
+      "lang": "Rust",
+      "label": "Rust",
+      "type": "Vec<Vec<f32>>",
+      "allocator": "system malloc",
+      "workload": "embeddings",
+      "runs": [
+        33.5,
+        33.5,
+        33.5,
+        33.5,
+        33.5
+      ],
+      "medianMiB": 33.5,
+      "seconds": 0.01,
+      "checksum": "3932160000"
+    },
+    {
+      "lang": "Rust",
+      "label": "Rust + mimalloc",
+      "type": "Vec<Vec<f32>>",
+      "allocator": "mimalloc",
+      "workload": "embeddings",
+      "runs": [
+        37.3,
+        37.3,
+        37.3,
+        37.3,
+        37.3
+      ],
+      "medianMiB": 37.3,
+      "seconds": 0.01,
+      "checksum": "3932160000"
+    },
+    {
+      "lang": "Zig",
+      "label": "Zig",
+      "type": "[][]f32",
+      "allocator": "libc malloc",
+      "workload": "embeddings",
+      "runs": [
+        33.4,
+        33.4,
+        33.4,
+        33.4,
+        33.4
+      ],
+      "medianMiB": 33.4,
+      "seconds": 0.01,
+      "checksum": "3932160000"
+    },
+    {
+      "lang": "Zig",
+      "label": "Zig + smp_allocator",
+      "type": "[][]f32",
+      "allocator": "smp_allocator",
+      "workload": "embeddings",
+      "runs": [
+        41,
+        41,
+        41,
+        41,
+        41
+      ],
+      "medianMiB": 41,
+      "seconds": 0.02,
+      "checksum": "3932160000"
+    },
+    {
+      "lang": "Go",
+      "label": "Go",
+      "type": "[][]float32",
+      "allocator": "Go GC",
+      "workload": "embeddings",
+      "runs": [
+        35.1,
+        34.8,
+        35.1,
+        35,
+        34.8
+      ],
+      "medianMiB": 35,
+      "seconds": 0.02,
+      "checksum": "3932160000"
+    },
+    {
+      "lang": "TypeScript",
+      "label": "TypeScript",
+      "type": "Float32Array[]",
+      "allocator": "V8 GC",
+      "workload": "embeddings",
+      "runs": [
+        100.5,
+        100.3,
+        100.1,
+        100.8,
+        100.9
+      ],
+      "medianMiB": 100.5,
+      "seconds": 0.09,
+      "checksum": "3932160000"
+    },
+    {
+      "lang": "Rust",
+      "label": "Rust",
+      "type": "Vec<Vec<f64>>",
+      "allocator": "system malloc",
+      "workload": "embeddings",
+      "runs": [
+        61.8,
+        61.8,
+        61.8,
+        61.8,
+        61.8
+      ],
+      "medianMiB": 61.8,
+      "seconds": 0.01,
+      "checksum": "3932160000"
+    },
+    {
+      "lang": "TypeScript",
+      "label": "TypeScript",
+      "type": "number[][]",
+      "allocator": "V8 GC",
+      "workload": "embeddings",
+      "runs": [
+        184.8,
+        184.8,
+        184.7,
+        185.1,
+        184.3
+      ],
+      "medianMiB": 184.8,
+      "seconds": 0.08,
+      "checksum": "3932160000"
+    }
+  ],
+  "session": [
+    {
+      "lang": "Rust",
+      "label": "Rust",
+      "type": "String",
+      "allocator": "system malloc",
+      "workload": "session",
+      "runs": [
+        59.7,
+        59.7,
+        59.7,
+        59,
+        59.7
+      ],
+      "medianMiB": 59.7,
+      "seconds": 0.19,
+      "checksum": "6675827800"
+    },
+    {
+      "lang": "Rust",
+      "label": "Rust + mimalloc",
+      "type": "String",
+      "allocator": "mimalloc",
+      "workload": "session",
+      "runs": [
+        10.6,
+        10.6,
+        10.6,
+        10.6,
+        10.6
+      ],
+      "medianMiB": 10.6,
+      "seconds": 0.19,
+      "checksum": "6675827800"
+    },
+    {
+      "lang": "Zig",
+      "label": "Zig",
+      "type": "[]u8",
+      "allocator": "libc malloc",
+      "workload": "session",
+      "runs": [
+        61.6,
+        62.4,
+        58.4,
+        61.6,
+        58.6
+      ],
+      "medianMiB": 61.6,
+      "seconds": 0.19,
+      "checksum": "6675827800"
+    },
+    {
+      "lang": "Zig",
+      "label": "Zig + smp_allocator",
+      "type": "[]u8",
+      "allocator": "smp_allocator",
+      "workload": "session",
+      "runs": [
+        8.4,
+        8.4,
+        8.4,
+        8.4,
+        8.4
+      ],
+      "medianMiB": 8.4,
+      "seconds": 0.59,
+      "checksum": "6675827800"
+    },
+    {
+      "lang": "Go",
+      "label": "Go",
+      "type": "string",
+      "allocator": "Go GC",
+      "workload": "session",
+      "runs": [
+        48.5,
+        48.5,
+        45.5,
+        45.4,
+        54.9
+      ],
+      "medianMiB": 48.5,
+      "seconds": 0.26,
+      "checksum": "6675827800"
+    },
+    {
+      "lang": "TypeScript",
+      "label": "TypeScript",
+      "type": "string",
+      "allocator": "V8 GC",
+      "workload": "session",
+      "runs": [
+        173.3,
+        171.9,
+        171.8,
+        171.6,
+        171.8
+      ],
+      "medianMiB": 171.8,
+      "seconds": 0.88,
+      "checksum": "6675827800"
+    }
+  ],
+  "timelines": {
+    "TypeScript": [
+      {
+        "t": 4,
+        "mib": 1.1
+      },
+      {
+        "t": 19,
+        "mib": 33
+      },
+      {
+        "t": 35,
+        "mib": 91.5
+      },
+      {
+        "t": 50,
+        "mib": 131
+      },
+      {
+        "t": 65,
+        "mib": 117.1
+      },
+      {
+        "t": 81,
+        "mib": 111.7
+      },
+      {
+        "t": 95,
+        "mib": 139.9
+      },
+      {
+        "t": 110,
+        "mib": 127.4
+      },
+      {
+        "t": 128,
+        "mib": 149.5
+      },
+      {
+        "t": 143,
+        "mib": 91.7
+      },
+      {
+        "t": 158,
+        "mib": 104.7
+      },
+      {
+        "t": 173,
+        "mib": 117.1
+      },
+      {
+        "t": 189,
+        "mib": 141
+      },
+      {
+        "t": 204,
+        "mib": 157.2
+      },
+      {
+        "t": 219,
+        "mib": 116.2
+      },
+      {
+        "t": 234,
+        "mib": 131.3
+      },
+      {
+        "t": 251,
+        "mib": 133.8
+      },
+      {
+        "t": 266,
+        "mib": 143
+      },
+      {
+        "t": 281,
+        "mib": 143.2
+      },
+      {
+        "t": 296,
+        "mib": 155
+      },
+      {
+        "t": 312,
+        "mib": 142.9
+      },
+      {
+        "t": 327,
+        "mib": 91.2
+      },
+      {
+        "t": 343,
+        "mib": 110.3
+      },
+      {
+        "t": 358,
+        "mib": 118.5
+      },
+      {
+        "t": 374,
+        "mib": 155.1
+      },
+      {
+        "t": 389,
+        "mib": 143.1
+      },
+      {
+        "t": 405,
+        "mib": 109.1
+      },
+      {
+        "t": 420,
+        "mib": 130.4
+      },
+      {
+        "t": 435,
+        "mib": 143
+      },
+      {
+        "t": 451,
+        "mib": 149.6
+      },
+      {
+        "t": 466,
+        "mib": 120.4
+      },
+      {
+        "t": 482,
+        "mib": 125.2
+      },
+      {
+        "t": 497,
+        "mib": 133.6
+      },
+      {
+        "t": 512,
+        "mib": 133.3
+      },
+      {
+        "t": 528,
+        "mib": 143.1
+      },
+      {
+        "t": 542,
+        "mib": 143.2
+      },
+      {
+        "t": 556,
+        "mib": 141.1
+      },
+      {
+        "t": 572,
+        "mib": 142.9
+      },
+      {
+        "t": 587,
+        "mib": 136.7
+      },
+      {
+        "t": 603,
+        "mib": 141.1
+      },
+      {
+        "t": 618,
+        "mib": 120.6
+      },
+      {
+        "t": 635,
+        "mib": 114.5
+      },
+      {
+        "t": 650,
+        "mib": 115.4
+      },
+      {
+        "t": 665,
+        "mib": 122
+      },
+      {
+        "t": 681,
+        "mib": 133.5
+      },
+      {
+        "t": 695,
+        "mib": 141.4
+      },
+      {
+        "t": 716,
+        "mib": 114.5
+      },
+      {
+        "t": 731,
+        "mib": 143.3
+      },
+      {
+        "t": 746,
+        "mib": 119.4
+      },
+      {
+        "t": 761,
+        "mib": 131.7
+      },
+      {
+        "t": 777,
+        "mib": 142.5
+      },
+      {
+        "t": 792,
+        "mib": 117.5
+      },
+      {
+        "t": 807,
+        "mib": 129.2
+      },
+      {
+        "t": 822,
+        "mib": 142.2
+      },
+      {
+        "t": 843,
+        "mib": 124.2
+      },
+      {
+        "t": 859,
+        "mib": 114.7
+      },
+      {
+        "t": 875,
+        "mib": 122.1
+      },
+      {
+        "t": 890,
+        "mib": 127.7
+      }
+    ],
+    "Rust": [
+      {
+        "t": 3,
+        "mib": 1.8
+      },
+      {
+        "t": 18,
+        "mib": 56.5
+      },
+      {
+        "t": 33,
+        "mib": 56.5
+      },
+      {
+        "t": 51,
+        "mib": 59.6
+      },
+      {
+        "t": 66,
+        "mib": 59.7
+      },
+      {
+        "t": 80,
+        "mib": 59.7
+      },
+      {
+        "t": 94,
+        "mib": 59.7
+      },
+      {
+        "t": 108,
+        "mib": 59.7
+      },
+      {
+        "t": 122,
+        "mib": 59.7
+      },
+      {
+        "t": 136,
+        "mib": 59.7
+      },
+      {
+        "t": 151,
+        "mib": 59.7
+      },
+      {
+        "t": 165,
+        "mib": 59.7
+      },
+      {
+        "t": 178,
+        "mib": 59.7
+      },
+      {
+        "t": 191,
+        "mib": 59.7
+      }
+    ],
+    "Go": [
+      {
+        "t": 3,
+        "mib": 7.3
+      },
+      {
+        "t": 18,
+        "mib": 43.6
+      },
+      {
+        "t": 32,
+        "mib": 45.2
+      },
+      {
+        "t": 47,
+        "mib": 45.3
+      },
+      {
+        "t": 63,
+        "mib": 45.3
+      },
+      {
+        "t": 78,
+        "mib": 45.3
+      },
+      {
+        "t": 95,
+        "mib": 45.3
+      },
+      {
+        "t": 110,
+        "mib": 45.3
+      },
+      {
+        "t": 126,
+        "mib": 45.3
+      },
+      {
+        "t": 141,
+        "mib": 45.4
+      },
+      {
+        "t": 156,
+        "mib": 45.5
+      },
+      {
+        "t": 171,
+        "mib": 45.5
+      },
+      {
+        "t": 186,
+        "mib": 45.5
+      },
+      {
+        "t": 201,
+        "mib": 45.5
+      },
+      {
+        "t": 215,
+        "mib": 45.5
+      },
+      {
+        "t": 229,
+        "mib": 50.3
+      },
+      {
+        "t": 244,
+        "mib": 50.3
+      },
+      {
+        "t": 257,
+        "mib": 50.3
+      }
+    ],
+    "Rust + mimalloc": [
+      {
+        "t": 3,
+        "mib": 1.8
+      },
+      {
+        "t": 18,
+        "mib": 10.6
+      },
+      {
+        "t": 32,
+        "mib": 10.6
+      },
+      {
+        "t": 47,
+        "mib": 10.6
+      },
+      {
+        "t": 61,
+        "mib": 10.6
+      },
+      {
+        "t": 76,
+        "mib": 10.6
+      },
+      {
+        "t": 90,
+        "mib": 10.6
+      },
+      {
+        "t": 105,
+        "mib": 10.6
+      },
+      {
+        "t": 119,
+        "mib": 10.6
+      },
+      {
+        "t": 135,
+        "mib": 10.6
+      },
+      {
+        "t": 149,
+        "mib": 10.6
+      },
+      {
+        "t": 163,
+        "mib": 10.6
+      },
+      {
+        "t": 178,
+        "mib": 10.6
+      }
+    ]
+  }
+}

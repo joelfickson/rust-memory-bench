@@ -1,0 +1,20 @@
+[package]
+name = "membench"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+mimalloc = { version = "0.1", optional = true }
+
+[features]
+mimalloc = ["dep:mimalloc"]
+
+[[bin]]
+name = "membench"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+lto = true

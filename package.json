@@ -1,0 +1,9 @@
+{
+  "name": "rust-memory-bench",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bench": "node harness/bench.ts",
+    "bench:quick": "node harness/bench.ts --quick"
+  }
+}
