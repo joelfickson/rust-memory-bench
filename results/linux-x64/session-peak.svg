@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" font-family="Outfit, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+<rect width="1600" height="900" fill="#0b0b0c"/>
+<text x="96" y="140" font-size="60" font-weight="600" fill="#f4f4f5" letter-spacing="-1">A long agent session</text>
+<text x="96" y="196" font-size="26" fill="#a1a1aa">2,000 turns, 50-turn context window, prompt rebuilt every turn. Peak memory, median of 5 runs.</text>
+<line x1="520" x2="520" y1="240" y2="699.6333333333333" stroke="#3f3f46" stroke-width="2"/>
+<line x1="551.1765409934171" x2="551.1765409934171" y1="236" y2="707.6333333333333" stroke="#a1a1aa" stroke-width="2" stroke-dasharray="6 6"/>
+<text x="561.1765409934171" y="735.6333333333333" font-size="20" fill="#a1a1aa">6.4 MiB live data at peak</text>
+<text x="492" y="264.8" text-anchor="end" font-size="24" font-weight="600" fill="#f4f4f5">Rust</text>
+<text x="492" y="289.8" text-anchor="end" font-size="17" fill="#a1a1aa" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace">String · system malloc</text>
+<path d="M520,250 h37.40634350688208 a4,4 0 0 1 4,4 v29.599999999999994 a4,4 0 0 1 -4,4 h-37.40634350688208 z" fill="#f59e0b"/>
+<text x="577.4063435068821" y="277.8" font-size="24" font-weight="600" fill="#f4f4f5" stroke="#0b0b0c" stroke-width="10" paint-order="stroke">8.5 MiB</text>
+<text x="492" y="343.1333333333333" text-anchor="end" font-size="24" font-weight="600" fill="#f4f4f5">Rust + mimalloc</text>
+<text x="492" y="368.1333333333333" text-anchor="end" font-size="17" fill="#a1a1aa" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace">String · mimalloc</text>
+<path d="M520,328.3333333333333 h74.91561938958705 a4,4 0 0 1 4,4 v29.599999999999994 a4,4 0 0 1 -4,4 h-74.91561938958705 z" fill="#f59e0b"/>
+<text x="614.915619389587" y="356.1333333333333" font-size="24" font-weight="600" fill="#f4f4f5" stroke="#0b0b0c" stroke-width="10" paint-order="stroke">16.2 MiB</text>
+<text x="492" y="421.46666666666664" text-anchor="end" font-size="24" font-weight="600" fill="#f4f4f5">Zig</text>
+<text x="492" y="446.46666666666664" text-anchor="end" font-size="17" fill="#a1a1aa" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace">[]u8 · libc malloc</text>
+<path d="M520,406.66666666666663 h37.893476959904206 a4,4 0 0 1 4,4 v29.599999999999994 a4,4 0 0 1 -4,4 h-37.893476959904206 z" fill="#71717a"/>
+<text x="577.8934769599042" y="434.46666666666664" font-size="24" font-weight="600" fill="#f4f4f5" stroke="#0b0b0c" stroke-width="10" paint-order="stroke">8.6 MiB</text>
+<text x="492" y="499.8" text-anchor="end" font-size="24" font-weight="600" fill="#f4f4f5">Zig + smp_allocator</text>
+<text x="492" y="524.8" text-anchor="end" font-size="17" fill="#a1a1aa" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace">[]u8 · smp_allocator</text>
+<path d="M520,485 h36.919210053859956 a4,4 0 0 1 4,4 v29.599999999999994 a4,4 0 0 1 -4,4 h-36.919210053859956 z" fill="#71717a"/>
+<text x="576.91921005386" y="512.8" font-size="24" font-weight="600" fill="#f4f4f5" stroke="#0b0b0c" stroke-width="10" paint-order="stroke">8.4 MiB</text>
+<text x="492" y="578.1333333333332" text-anchor="end" font-size="24" font-weight="600" fill="#f4f4f5">Go</text>
+<text x="492" y="603.1333333333332" text-anchor="end" font-size="17" fill="#a1a1aa" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace">string · Go GC</text>
+<path d="M520,563.3333333333333 h154.31837223219623 a4,4 0 0 1 4,4 v29.599999999999994 a4,4 0 0 1 -4,4 h-154.31837223219623 z" fill="#71717a"/>
+<text x="694.3183722321962" y="591.1333333333332" font-size="24" font-weight="600" fill="#f4f4f5" stroke="#0b0b0c" stroke-width="10" paint-order="stroke">32.5 MiB</text>
+<text x="492" y="656.4666666666666" text-anchor="end" font-size="24" font-weight="600" fill="#f4f4f5">TypeScript</text>
+<text x="492" y="681.4666666666666" text-anchor="end" font-size="17" fill="#a1a1aa" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace">string · V8 GC</text>
+<path d="M520,641.6666666666666 h810 a4,4 0 0 1 4,4 v29.599999999999994 a4,4 0 0 1 -4,4 h-810 z" fill="#71717a"/>
+<text x="1350" y="669.4666666666666" font-size="24" font-weight="600" fill="#f4f4f5" stroke="#0b0b0c" stroke-width="10" paint-order="stroke">167.1 MiB</text>
+<text x="96" y="844" font-size="20" fill="#71717a">Intel(R) Xeon(R) Processor · rustc 1.98.1 · Zig 0.17.0 · go1.27.3 · Node v26.12.1</text>
+<text x="1504" y="844" font-size="20" fill="#71717a" text-anchor="end">github.com/joelfickson/rust-memory-bench</text>
+</svg>
