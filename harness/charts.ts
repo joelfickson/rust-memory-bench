@@ -76,12 +76,14 @@ function niceStep(max: number, ticks: number): number {
 }
 
 export function timelineChart(o: { title: string; subtitle: string; series: Series[]; footer: string }): string {
+  const series = o.series.filter((s) => s.points.length > 0);
+  if (series.length === 0) return frame(o.title, o.subtitle, o.footer, "");
   const left = 200;
   const right = W - PAD - 190;
   const top = 260;
   const bottom = H - 170;
-  const maxT = Math.max(...o.series.flatMap((s) => s.points.map((p) => p.t)));
-  const maxY = Math.max(...o.series.flatMap((s) => s.points.map((p) => p.mib)));
+  const maxT = Math.max(1, ...series.flatMap((s) => s.points.map((p) => p.t)));
+  const maxY = Math.max(...series.flatMap((s) => s.points.map((p) => p.mib)));
   const yStep = niceStep(maxY, 4);
   const yMax = Math.ceil(maxY / yStep) * yStep;
   const tStep = niceStep(maxT / 1000, 6);
@@ -96,7 +98,7 @@ export function timelineChart(o: { title: string; subtitle: string; series: Seri
     parts.push(`<text x="${x(s * 1000)}" y="${bottom + 34}" text-anchor="middle" font-size="20" fill="${C.ink2}">${Number(s.toFixed(2))} s</text>`);
   }
   const labels: { y: number; label: string; color: string; value: number }[] = [];
-  for (const s of o.series) {
+  for (const s of series) {
     const color = SERIES[s.label] ?? C.ink;
     const d = s.points.map((p, i) => `${i ? "L" : "M"}${x(p.t).toFixed(1)},${y(p.mib).toFixed(1)}`).join(" ");
     parts.push(`<path d="${d}" fill="none" stroke="${C.bg}" stroke-width="6" stroke-linejoin="round"/>`);
